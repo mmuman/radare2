@@ -5,3 +5,18 @@ EXPECT=<<EOF
 0x000009f2
 EOF
 RUN
+
+NAME=68020 DIVL operands
+FILE=malloc://32
+CMDS=<<EOF
+e asm.arch=m68k
+e asm.cpu=68020
+wx 4c6f08010042 @ 0
+ao ~size
+pd1
+EOF
+EXPECT=<<EOF
+size: 6
+            0x00000000      4c6f08010042   divs.l 0x42(a7), d1, d0
+EOF
+RUN
